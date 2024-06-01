@@ -1,13 +1,12 @@
-
-import './App.css'
+import "./App.css";
+import Signup from "./pages/signup/Signup";
 
 function App() {
-
   return (
-    <>
-      <button className="btn btn-primary">Primary</button>
-    </>
-  )
+    <div className="p-4 h-screen flex items-center justify-center">
+      <Signup/>
+    </div>
+  );
 }
 
-export default App
+export default App;
