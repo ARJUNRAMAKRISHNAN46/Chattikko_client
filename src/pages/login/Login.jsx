@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { loading, login } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await Login(email, password);
+    await login(email, password);
   };
 
   return (
@@ -19,12 +21,14 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div>
             <label className="label p-2">
-              <span className="text-base label-text">Username</span>
+              <span className="text-base label-text">Email</span>
             </label>
             <input
               type="text"
-              placeholder="Enter username"
+              placeholder="Enter email"
               className="w-full input input-bordered b-10"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -35,6 +39,8 @@ function Login() {
               type="text"
               placeholder="Enter password"
               className="w-full input input-bordered b-10"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <Link
@@ -44,7 +50,13 @@ function Login() {
             Don't have an account ?
           </Link>
           <div>
-            <button className="btn btn-block btn-sm mt-2">Login</button>
+            <button className="btn btn-block btn-sm mt-2" disabled={loading}>
+              {loading ? (
+                <span className="loading loading-spinner "></span>
+              ) : (
+                "Login"
+              )}
+            </button>
           </div>
         </form>
       </div>
